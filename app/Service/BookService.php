@@ -2,7 +2,10 @@
 
 namespace App\Service;
 
+use App\Models\Author;
+use App\Models\Book;
 use App\Repositories\BookRepository;
+use App\Transform\BookTransform;
 
 class BookService
 {
@@ -15,12 +18,12 @@ class BookService
     }
 
     /** @param string $query */
-    public function searchBook($query, $limit = 10)
+    public function searchBook($query, $page = 1, $limit = 10)
     {
         if($query) {
-            return 'data';
+            return BookTransform::collection(Book::search("title:$query OR summary:$query OR authors.name:$query OR publisher.name:$query")->paginate($limit));
         }
 
-        return $this->bookRepository->paginate($limit);
+        return BookTransform::collection(Book::search()->paginate($limit));
     }
 }

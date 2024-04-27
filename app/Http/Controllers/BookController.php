@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service\BookService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 {
@@ -17,6 +18,10 @@ class BookController extends Controller
 
     public function searchBook(Request $request)
     {
+        $request->validate([
+            'q' => 'string|required',
+        ]);
+
         $q = $request->get('q', null);
         return $this->bookService->searchBook($q);
     }
