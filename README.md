@@ -9,8 +9,10 @@
 - mysql -u root -p < /opt/database/db_exam.sql (password: admin)
 - click: ctrl + p + q
 - docker exec -it web composer install
+- docker exec -it web cp -r opt/docker/patch/SearchableListFactory.php vendor/matchish/laravel-scout-elasticsearch/src/Searchable/SearchableListFactory.php
 - docker restart jobs
 - docker exec -it web php artisan scout:import
+
 
 ## Run index
 docker exec -it web php artisan scout:import

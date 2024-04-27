@@ -17,7 +17,7 @@ services:
         - PHP_UPLOAD_MAX_FILESIZE=1024M
       volumes:
         - ./:/app:cached
-
+        - ./docker/patch:/opt/docker/patch:cached
       ports:
         - "8080:80"
         - "443:443"
